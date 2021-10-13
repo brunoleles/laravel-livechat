@@ -37,7 +37,13 @@ const app_store = createStore({
         },
 
         on_message_handler({ state }, event) {
+            console.log("received message");
+
+            console.log(event);
             let message = parse_message_event(event);
+
+            console.log(message);
+            console.log("--");
 
             state.messages = [...state.messages, message];
         },

@@ -19963,7 +19963,11 @@ var app_store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.createStore)({
     },
     on_message_handler: function on_message_handler(_ref2, event) {
       var state = _ref2.state;
+      console.log("received message");
+      console.log(event);
       var message = (0,_utils_messages__WEBPACK_IMPORTED_MODULE_1__.parse_message_event)(event);
+      console.log(message);
+      console.log("--");
       state.messages = [].concat(_toConsumableArray(state.messages), [message]);
     },
     send_message: function send_message(_ref3, message) {
