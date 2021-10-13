@@ -7,7 +7,6 @@ use App\Support\ChatServer\Messages\DefaultMessage;
 use App\Support\ChatServer\Messages\NotificationMessage;
 use Ratchet\RFC6455\Messaging\Message;
 use function data_get;
-use function dump;
 use function GuzzleHttp\json_decode;
 use function value;
 

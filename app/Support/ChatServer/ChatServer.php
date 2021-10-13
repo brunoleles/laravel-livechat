@@ -39,6 +39,12 @@ class ChatServer implements MessageComponentInterface {
 
 		$this->send_to($conn, new NotificationMessage('Welcome...'));
 		$this->send_to($conn, new DefaultMessage('The quick brown fox jumps over the lazy dog'));
+		
+		//NOTE: testing message rendering
+		$x = new DefaultMessage('The quick brown fox jumps over the lazy dog');
+		$x->from_me = true;
+		$this->send_to($conn, $x);
+		
 
 		$this->send_to_all_except($conn, new NotificationMessage(sprintf(
 								'(%s) joined',
