@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  web:
+    environment:
+    - APACHE_RUN_USER=#1000
+    build:
+      context: ./dockers/web
+    ports:
+    - 8000:80
+    - 8001:81
+    volumes:
+    - ./:/var/www/html
+
+  # database:
+  #   image: mariadb
+  #   restart: always
+  #   ports:
+  #   - 33061:3306
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: 123
+  #   volumes:
+  #     - ./.dockers-data/mysql:/var/lib/mysql
