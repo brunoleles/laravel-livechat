@@ -19486,14 +19486,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _chat_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chat.vue */ "./resources/js/components/chat.vue");
-/* harmony import */ var _repositories_chat_client_repository__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../repositories/chat_client_repository */ "./resources/js/repositories/chat_client_repository.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -19504,8 +19502,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     this.init();
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)(["messages"])),
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)(["init"])),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)(["messages"])),
+  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)(["init"])),
   components: {
     chat: _chat_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -19542,6 +19540,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)(["messages"])),
   methods: _objectSpread({
     send_message: function send_message() {
+      this.$store.dispatch("send_message", this.message);
       this.message = "";
     }
   }, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)(["connect"]))
@@ -19565,9 +19564,7 @@ __webpack_require__.r(__webpack_exports__);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_chat = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("chat");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chat), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.messages), 1
-  /* TEXT */
-  )]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chat), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ messages }} ")]);
 }
 
 /***/ }),
@@ -19585,34 +19582,78 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  "class": "flex h-screen antialiased text-gray-800"
+};
+var _hoisted_2 = {
+  "class": "flex flex-row h-full w-full overflow-x-hidden"
+};
+var _hoisted_3 = {
+  "class": "flex flex-col flex-auto h-full p-6"
+};
+var _hoisted_4 = {
+  "class": "flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4"
+};
+var _hoisted_5 = {
+  "class": "flex flex-col h-full overflow-x-auto mb-4"
+};
+var _hoisted_6 = {
+  "class": "flex flex-col h-full"
+};
+var _hoisted_7 = {
+  "class": "grid grid-cols-12 gap-y-2"
+};
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
+}, " AL ", -1
+/* HOISTED */
+);
+
+var _hoisted_9 = {
+  "class": "relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
+};
+var _hoisted_10 = {
+  "class": "flex flex-row items-center h-16 rounded-xl bg-white w-full px-4"
+};
+var _hoisted_11 = {
+  "class": "flex-grow ml-4"
+};
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "ml-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0"
+}, " SEND ")], -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.messages) + " ", 1
-  /* TEXT */
-  ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.messages, function (message, i) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.messages, function (message, i) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      key: i
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(message), 1
+      key: i,
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["col-start-1 col-end-8 p-3 rounded-lg", message.from_me === true ? 'col-start-6 col-end-13 p-3 rounded-lg' : 'col-start-1 col-end-8 p-3 rounded-lg'])
+    }, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(message), 1
     /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div>\n\t\t\t\t\t\t\t\t\t<div class=\"text-xl font-medium text-black\">\n\t\t\t\t\t\t\t\t\t\t{{ \"anom alpaca\" }}\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t<p class=\"text-gray-500\">{{ message }}</p>\n\t\t\t\t\t\t\t\t</div> ")], 2
+    /* CLASS */
     );
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+  ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    onSubmit: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.send_message && $options.send_message.apply($options, arguments);
     }, ["prevent"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.message = $event;
-    })
+    }),
+    "class": "flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.message]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[1] || (_cache[1] = function () {
-      return $options.send_message && $options.send_message.apply($options, arguments);
-    })
-  }, "send")], 32
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.message]])]), _hoisted_12])], 32
   /* HYDRATE_EVENTS */
-  )]);
+  )])])])]);
 }
 
 /***/ }),
@@ -19671,91 +19712,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/repositories/chat_client_repository.js":
-/*!*************************************************************!*\
-  !*** ./resources/js/repositories/chat_client_repository.js ***!
-  \*************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ ChatClientRepository)
-/* harmony export */ });
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var ChatClientRepository = /*#__PURE__*/function () {
-  function ChatClientRepository() {
-    _classCallCheck(this, ChatClientRepository);
-
-    this.on_message_listeners = [];
-  }
-
-  _createClass(ChatClientRepository, [{
-    key: "add_on_message_listener",
-    value: function add_on_message_listener(on_message_listener) {
-      this.on_message_listeners.push(on_message_listener);
-    }
-  }, {
-    key: "connect",
-    value: function connect() {
-      var _this = this;
-
-      this.conn = new WebSocket("ws://localhost:8001/");
-      this.conn.onmessage = this._on_message_handler.bind(this);
-
-      this.conn.onopen = function () {
-        setInterval(function () {
-          return _this.conn.send("aaaasdasdsa " + Date.now());
-        }, 500);
-      };
-
-      this.conn.onerror = function () {
-        for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-          args[_key] = arguments[_key];
-        }
-
-        console.log('close', args);
-      };
-    }
-  }, {
-    key: "_on_message_handler",
-    value: function _on_message_handler(message) {
-      console.log(message);
-
-      var _iterator = _createForOfIteratorHelper(this.on_message_listeners),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var listener = _step.value;
-          listener(message);
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-    }
-  }]);
-
-  return ChatClientRepository;
-}();
-
-
-
-/***/ }),
-
 /***/ "./resources/js/store/app_store.js":
 /*!*****************************************!*\
   !*** ./resources/js/store/app_store.js ***!
@@ -19770,8 +19726,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var _repositories_chat_client_repository__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../repositories/chat_client_repository */ "./resources/js/repositories/chat_client_repository.js");
+/* harmony import */ var _utils_messages__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/messages */ "./resources/js/utils/messages.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -19784,6 +19744,8 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -19798,19 +19760,21 @@ var app_store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.createStore)({
   state: function state() {
     return {
       status: STATUS_UNITIALIZED,
-      chat_client: new _repositories_chat_client_repository__WEBPACK_IMPORTED_MODULE_1__["default"](),
+      conn: null,
       messages: []
     };
   },
   actions: {
     init: function init(_ref) {
+      var _this = this;
+
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var state;
+        var store, state;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                state = _ref.state;
+                store = _ref.store, state = _ref.state;
 
                 if (!(state.status != STATUS_UNITIALIZED)) {
                   _context.next = 3;
@@ -19821,23 +19785,109 @@ var app_store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.createStore)({
 
               case 3:
                 state.status = STATUS_INITIALIZING;
-                state.chat_client.connect();
-                state.chat_client.add_on_message_listener(function (event) {
-                  state.messages = [].concat(_toConsumableArray(state.messages), [event.data]);
-                });
+                state.conn = new WebSocket("ws://localhost:8001/");
+
+                state.conn.onmessage = function (event) {
+                  return _this.dispatch("on_message_handler", event);
+                };
+
+                state.conn.onopen = function () {
+                  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+                    args[_key] = arguments[_key];
+                  }
+
+                  console.log("Opened", args); // setInterval(() => this.conn.send("aaaasdasdsa " + Date.now()), 500);
+                };
+
+                state.conn.onerror = function () {
+                  for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+                    args[_key2] = arguments[_key2];
+                  }
+
+                  console.log("Error", args); // console.log("close", args);
+                };
+
                 state.status = STATUS_INITIALIZED;
 
-              case 7:
+              case 9:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    },
+    on_message_handler: function on_message_handler(_ref2, event) {
+      var state = _ref2.state;
+      var message = (0,_utils_messages__WEBPACK_IMPORTED_MODULE_1__.parse_message_event)(event);
+      state.messages = [].concat(_toConsumableArray(state.messages), [message]);
+    },
+    send_message: function send_message(_ref3, message) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var state, message_payload;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                state = _ref3.state;
+
+                if (message) {
+                  _context2.next = 3;
+                  break;
+                }
+
+                return _context2.abrupt("return");
+
+              case 3:
+                message_payload = {
+                  timestamp: Date.now(),
+                  message: message
+                }; // console.log(state.conn);
+
+                state.messages = [].concat(_toConsumableArray(state.messages), [_objectSpread(_objectSpread({}, message_payload), {}, {
+                  from_me: true
+                })]);
+                state.conn.send(JSON.stringify(message_payload));
+
+              case 6:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (app_store);
+
+/***/ }),
+
+/***/ "./resources/js/utils/messages.js":
+/*!****************************************!*\
+  !*** ./resources/js/utils/messages.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "parse_message_event": () => (/* binding */ parse_message_event)
+/* harmony export */ });
+function parse_message_event(event) {
+  try {
+    var data = event.data;
+
+    if (typeof data === "string") {
+      data = JSON.parse(data);
+    }
+
+    return data;
+  } catch (error) {//TODO; return paerse error message....
+  }
+
+  return void 0;
+}
 
 /***/ }),
 

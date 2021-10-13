@@ -1,13 +1,12 @@
 <template>
 	<div>
 		<chat></chat>
-		{{ messages }}
+		<!-- {{ messages }} -->
 	</div>
 </template>
 
 <script>
 import chat from "./chat.vue";
-import ChatClientRepository from "../repositories/chat_client_repository";
 import { mapActions, mapState } from "vuex";
 
 export default {
