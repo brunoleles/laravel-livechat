@@ -11,57 +11,33 @@
 						p-4
 					"
 				>
-					<div class="flex flex-col h-full overflow-x-auto mb-4">
+					<div
+						ref="messages_container"
+						class="flex flex-col h-full overflow-x-auto mb-4"
+					>
 						<div class="flex flex-col h-full">
 							<div class="grid grid-cols-12 gap-y-2">
 								<template
 									:key="i"
 									v-for="(message, i) in messages"
 								>
-									<div
-										class="
-											col-start-1 col-end-8
-											p-3
-											rounded-lg
-										"
-                                        :class=" message.from_me === true ? 'col-start-6 col-end-13 p-3 rounded-lg' : 'col-start-1 col-end-8 p-3 rounded-lg' "
-									>
-										<div
-											class="
-												flex
-												items-center
-												justify-center
-												h-10
-												w-10
-												rounded-full
-												bg-indigo-500
-												flex-shrink-0
-											"
-										>
-											AL
-										</div>
-										<div
-											class="
-												relative
-												ml-3
-												text-sm
-												bg-white
-												py-2
-												px-4
-												shadow
-												rounded-xl
-											"
-										>
-											{{ message }}
-										</div>
+									<message-notification
+										v-if="message.type === 'notification'"
+										:message="message"
+									></message-notification>
 
-										<!-- <div>
+									<message-default
+										v-else
+										:message="message"
+									></message-default>
+
+									<!-- <div>
 									<div class="text-xl font-medium text-black">
 										{{ "anom alpaca" }}
 									</div>
 									<p class="text-gray-500">{{ message }}</p>
 								</div> -->
-									</div>
+									<!-- </div> -->
 								</template>
 							</div>
 						</div>
@@ -79,7 +55,7 @@
 								px-4
 							"
 						>
-							<div class="flex-grow ml-4">
+							<div class="flex-grow">
 								<input
 									v-model="message"
 									class="
@@ -122,6 +98,9 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import message__default from "./message__default.vue";
+import message__notification from "./message__notification.vue";
+
 export default {
 	data() {
 		return {
@@ -135,12 +114,25 @@ export default {
 		...mapState(["messages"]),
 	},
 
+	watch: {
+		messages(messages) {
+			this.$nextTick(() => {
+				this.$refs.messages_container.scrollTop =
+					this.$refs.messages_container.scrollHeight;
+			});
+		},
+	},
+
 	methods: {
 		send_message() {
 			this.$store.dispatch("send_message", this.message);
 			this.message = "";
 		},
 		...mapActions(["connect"]),
+	},
+	components: {
+		"message-default": message__default,
+		"message-notification": message__notification,
 	},
 };
 </script>

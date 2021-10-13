@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
         git \
     #Docker PHP ext
     && docker-php-ext-install \
-        zip pdo_mysql gd \
+        zip pdo_mysql gd pcntl \
     && a2enmod \
         rewrite
 
