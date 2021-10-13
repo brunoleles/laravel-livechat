@@ -16,7 +16,7 @@ class ChatServer implements MessageComponentInterface {
 
 	public function __construct() {
 		$this->clients = new SplObjectStorage();
-		$this->rooms = new Map();
+		// $this->rooms = new Map(); // not implemented
 	}
 
 	public function onOpen(ConnectionInterface $conn) {

@@ -12,19 +12,11 @@ import { mapActions, mapState } from "vuex";
 
 export default {
 	data() {
-		return {
-			// messages: [],
-			// chat_client: new ChatClientRepository(),
-		};
+		return {};
 	},
 
 	mounted() {
-		// this.connect();
-		// this.chat_client = new ChatClientRepository();
-		// this.chat_client.add_on_message_listener(
-		// 	(message) => (this.messages = [...this.messages, message])
-		// );
-		// this.chat_client.connect();
+		this.init();
 	},
 
 	computed: {
@@ -32,7 +24,7 @@ export default {
 	},
 
 	methods: {
-		...mapActions(["connect"]),
+		...mapActions(["init"]),
 	},
 
 	components: { chat },

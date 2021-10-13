@@ -23,9 +23,7 @@ export default {
 		};
 	},
 
-	mounted() {
-		this.connect();
-	},
+	mounted() {},
 
 	computed: {
 		...mapState(["messages"]),
