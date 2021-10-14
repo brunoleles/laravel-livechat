@@ -5,14 +5,14 @@
 			class="flex h-screen antialiased text-gray-800"
 		>
 			<div class="flex flex-row h-full w-full overflow-x-hidden">
-				<div class="flex flex-col flex-auto h-full p-6">
+				<div class="flex flex-col flex-auto h-full p-1">
 					<div
 						class="
 							flex flex-col flex-auto flex-shrink-0
 							rounded-2xl
 							bg-gray-100
 							h-full
-							p-4
+							p-2
 						"
 					>
 						<div
@@ -20,7 +20,7 @@
 							class="flex flex-col h-full overflow-x-auto mb-4"
 						>
 							<div class="flex flex-col h-full">
-								<div class="grid grid-cols-12 gap-y-2">
+								<div class="grid grid-cols-12 gap-y-1">
 									<template
 										:key="i"
 										v-for="(message, i) in messages"
@@ -54,11 +54,11 @@
 								class="
 									flex flex-row
 									items-center
-									h-16
 									rounded-xl
 									bg-white
 									w-full
-									px-4
+									px-1
+                                    py-1
 								"
 							>
 								<div class="flex-grow">
@@ -68,19 +68,21 @@
 										class="
 											flex
 											w-full
+                                            h-12
 											border
 											rounded-xl
 											focus:outline-none
 											focus:border-indigo-300
 											px-2
-											h-10
+
 										"
 									/>
 								</div>
-								<div class="ml-4">
+								<div class="ml-2">
 									<button
 										class="
 											flex
+                                            h-12
 											items-center
 											justify-center
 											bg-indigo-500
@@ -140,7 +142,7 @@ export default {
 			this.$store.dispatch("send_message", this.message);
 			this.message = "";
 		},
-		...mapActions(["connect"]),
+		...mapActions(["do_connect"]),
 	},
 	components: {
 		"message-default": message__default,

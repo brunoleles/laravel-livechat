@@ -43,6 +43,13 @@ USER root
 
 COPY default.conf /etc/apache2/sites-enabled/000-default.conf
 
+Run pecl bundle \
+        ds \
+    && docker-php-ext-configure \
+        /var/www/html/ds \
+    && docker-php-ext-install \
+        /var/www/html/ds
+
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 
 EXPOSE 80

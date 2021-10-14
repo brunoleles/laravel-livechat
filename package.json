@@ -20,6 +20,8 @@
         "vue-loader": "^16.8.1"
     },
     "dependencies": {
+        "@heroicons/vue": "^1.0.4",
+        "vue-router": "^4.0.11",
         "vuex": "^4.0.2"
     }
 }

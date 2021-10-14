@@ -1,33 +1,15 @@
 <template>
 	<div>
-		<chat></chat>
-		<!-- {{ messages }} -->
+		<router-view> </router-view>
 	</div>
 </template>
 
 <script>
 import chat from "./chat.vue";
 import { mapActions, mapState } from "vuex";
+import router from "../router/router";
 
-export default {
-	data() {
-		return {};
-	},
-
-	mounted() {
-		this.init();
-	},
-
-	computed: {
-		...mapState(["messages"]),
-	},
-
-	methods: {
-		...mapActions(["init"]),
-	},
-
-	components: { chat },
-};
+export default { };
 </script>
 
 <style>

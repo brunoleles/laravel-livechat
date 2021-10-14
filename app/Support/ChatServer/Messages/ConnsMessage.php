@@ -16,7 +16,7 @@ class ConnsMessage extends AbstractMessage {
 	 */
 	public $conns;
 
-	public function __construct($message, $conns) {
+	public function __construct($message, $conns = []) {
 		$this->message = $message;
 		$this->conns = $conns;
 	}

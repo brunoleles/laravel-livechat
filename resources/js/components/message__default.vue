@@ -2,11 +2,12 @@
 	<div
 		:class="
 			message.from_me === true
-				? 'flex items-center col-start-6 col-end-13 p-3 rounded-lg relative'
-				: 'flex items-center col-start-1 col-end-8 p-3 rounded-lg relative'
+				? 'flex items-center col-start-2 col-end-13 p-1 rounded-lg relative md:col-start-6'
+				: 'flex items-center col-start-1 col-end-12 p-1 rounded-lg relative md:col-end-8'
 		"
 	>
 		<div
+        v-if="false"
 			class="
 				flex
 				items-center
@@ -20,8 +21,13 @@
 		>
 			AL
 		</div>
-		<div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
-            <div class="font-semibold">Alpaca Anom</div>
+		<div class="relative flex-grow ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+            <div v-if="message.from_me === true" >
+                <span class="font-semibold">me</span>
+            </div>
+            <div v-if="message.from_id" >
+                <span class="font-semibold">{{ message.from_name }}</span> @ <span class="font-light">{{message.from_id}}</span>
+            </div>
 			{{ message.message }}
 		</div>
 	</div>
