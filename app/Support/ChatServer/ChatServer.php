@@ -11,45 +11,55 @@ use Ratchet\RFC6455\Messaging\Message;
 use Ratchet\WebSocket\MessageComponentInterface;
 use SplObjectStorage;
 use function dump;
-use function GuzzleHttp\json_decode;
 use function json_encode;
 use function value;
 
 class ChatServer implements MessageComponentInterface {
 
-	protected $clients;
-	protected $rooms;
+	/**
+	 * @var SplObjectStorage|ConnectionInterface[]
+	 */
+	private $conns;
+	
+	/**
+	 * @var SplObjectStorage|ConnectionInterface[]
+	 */
+	
+	
+	private $rooms;
 
 	/**
 	 * @var ChatMessageFactory
 	 */
-	protected $message_facotry;
+	private $message_facotry;
 
 	public function __construct() {
-		$this->clients = new SplObjectStorage();
+		$this->conns = new SplObjectStorage();
 		$this->message_facotry = new ChatMessageFactory();
 		// $this->rooms = new Map(); // not implemented
 	}
 
 	public function onOpen(ConnectionInterface $conn) {
-		$this->clients->attach($conn);
+		$this->conns->attach($conn);
 		echo "New connection! ({$conn->resourceId})\n";
-//		dump($conn);
-
 
 		$this->send_to($conn, new NotificationMessage('Welcome...'));
 		$this->send_to($conn, new DefaultMessage('The quick brown fox jumps over the lazy dog'));
-		
+
 		//NOTE: testing message rendering
 		$x = new DefaultMessage('The quick brown fox jumps over the lazy dog');
 		$x->from_me = true;
 		$this->send_to($conn, $x);
-		
+
 
 		$this->send_to_all_except($conn, new NotificationMessage(sprintf(
 								'(%s) joined',
 								$conn->resourceId
 		)));
+
+
+		$this->send_to_all_except($conn, $this->message_facotry->create_from_conns($this->conns));
+
 
 		echo "   done.\n";
 	}
@@ -69,7 +79,7 @@ class ChatServer implements MessageComponentInterface {
 	}
 
 	public function onClose(ConnectionInterface $conn) {
-		$this->clients->detach($conn);
+		$this->conns->detach($conn);
 
 		$this->send_to_all_except($conn, new NotificationMessage(sprintf(
 								'%s left',
@@ -114,7 +124,7 @@ class ChatServer implements MessageComponentInterface {
 	public function send_to_all_except($except, $message) {
 		echo "all\n";
 
-		foreach ($this->clients as $client) {
+		foreach ($this->conns as $client) {
 			dump($client->resourceId);
 
 			if ($except !== $client) {
@@ -123,7 +133,5 @@ class ChatServer implements MessageComponentInterface {
 		}
 		echo "all done\n";
 	}
-
-	
 
 }

@@ -3,9 +3,12 @@
 namespace App\Support\ChatServer;
 
 use App\Support\ChatServer\Messages\AbstractMessage;
+use App\Support\ChatServer\Messages\ConnsMessage;
 use App\Support\ChatServer\Messages\DefaultMessage;
 use App\Support\ChatServer\Messages\NotificationMessage;
 use Ratchet\RFC6455\Messaging\Message;
+use Ratchet\ConnectionInterface;
+use function collect;
 use function data_get;
 use function GuzzleHttp\json_decode;
 use function value;
@@ -42,6 +45,17 @@ class ChatMessageFactory {
 		}
 
 		return $new_message;
+	}
+
+	public function create_from_conns($conns) {
+		return new ConnsMessage(
+				collect($conns)->map(function(ConnectionInterface $conn) {
+					return $conn->resourceId;
+				})->implode(','),
+				collect($conns)->map(function(ConnectionInterface $conn) {
+					return $conn->resourceId;
+				})->all()
+		);
 	}
 
 }

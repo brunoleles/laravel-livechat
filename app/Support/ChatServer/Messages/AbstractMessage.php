@@ -16,6 +16,11 @@ abstract class AbstractMessage {
 	 */
 	const TYPE_NOTIFICATION = 'notification';
 
+	/**
+	 * 
+	 */
+	const TYPE_CONNS = 'conns';
+	
 	public function __toString() {
 		return json_encode($this);
 	}

@@ -2,8 +2,8 @@
 	<div
 		:class="
 			message.from_me === true
-				? 'flex items-center col-start-6 col-end-13 p-3 rounded-lg'
-				: 'flex items-center col-start-1 col-end-8 p-3 rounded-lg'
+				? 'flex items-center col-start-6 col-end-13 p-3 rounded-lg relative'
+				: 'flex items-center col-start-1 col-end-8 p-3 rounded-lg relative'
 		"
 	>
 		<div
@@ -21,15 +21,9 @@
 			AL
 		</div>
 		<div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
-			{{ message }}
+            <div class="font-semibold">Alpaca Anom</div>
+			{{ message.message }}
 		</div>
-
-		<!-- <div>
-									<div class="text-xl font-medium text-black">
-										{{ "anom alpaca" }}
-									</div>
-									<p class="text-gray-500">{{ message }}</p>
-								</div> -->
 	</div>
 </template>
 
