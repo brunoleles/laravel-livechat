@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import { parse_message_event } from "../utils/messages";
+import { parse_message_event } from "@/utils/messages";
 
 const STATUS_UNITIALIZED = "uninitialized";
 
@@ -20,12 +20,9 @@ const app_store = createStore({
 
     actions: {
         async do_enter({ state }, name) {
-            let request_access_response = await axios.post(
-                "/api/request_access",
-                {
-                    name: name,
-                }
-            );
+            let request_access_response = await axios.post("/api/request_access", {
+                name: name,
+            });
 
             if (request_access_response.status != 200) {
                 throw new Error("unable to request access");
@@ -34,7 +31,7 @@ const app_store = createStore({
             state.name = request_access_response.data.data.name;
             state.access_payload = request_access_response.data.data.access_payload;
 
-            console.log('enter');
+            console.log("enter");
             console.log(request_access_response);
             console.log(state);
 
@@ -48,13 +45,8 @@ const app_store = createStore({
             }
 
             return await new Promise((resolve, reject) => {
-                state.conn = new WebSocket(
-                    `ws://localhost:8001/?access_payload=${encodeURI(
-                        state.access_payload
-                    )}`
-                );
-                state.conn.onmessage = (event) =>
-                    this.dispatch("on_message_handler", event);
+                state.conn = new WebSocket(`ws://localhost:8001/?access_payload=${encodeURI(state.access_payload)}`);
+                state.conn.onmessage = (event) => this.dispatch("on_message_handler", event);
 
                 state.conn.onopen = (...args) => {
                     console.log("Opened", args);
@@ -74,7 +66,7 @@ const app_store = createStore({
 
             let message = parse_message_event(event);
 
-            if( message.type == 'conns') {
+            if (message.type == "conns") {
                 //NOTE: store new connections
                 return;
             }
@@ -98,10 +90,7 @@ const app_store = createStore({
 
             // console.log(state.conn);
 
-            state.messages = [
-                ...state.messages,
-                { ...message_payload, from_me: true },
-            ];
+            state.messages = [...state.messages, { ...message_payload, from_me: true }];
 
             state.conn.send(JSON.stringify(message_payload));
         },

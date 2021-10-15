@@ -1,15 +1,26 @@
-require("./bootstrap");
+require('./bootstrap');
 
-window.Vue = require("vue");
-import router from "./router/router";
-import app_store from "./store/app_store";
+import { createApp } from 'vue';
+import router from '@/router/router';
+import app_store from '@/store/app_store';
 
-const app = Vue.createApp({
-    template: "<app></app>",
+// const files = require.context('./components', true, /\.vue$/i);
+// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+
+const app = createApp({
+    template: '<app></app>',
     components: {
-        "app" : require("./components/app.vue").default,
-    }
+        // pages
+        app: require('@/pages/app.vue').default,
+        welcome: require('@/pages/welcome.vue').default,
+        chat: require('@/pages/chat.vue').default,
+        // components
+        'message-default': require('@/components/message__default.vue').default,
+        'message-notification': require('@/components/message__notification.vue').default,
+    },
 });
-app.use(app_store);
-app.use(router);
-app.mount("#app");
+app
+    //
+    .use(router)
+    .use(app_store)
+    .mount('#app');
