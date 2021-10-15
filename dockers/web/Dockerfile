@@ -1,7 +1,6 @@
-
 FROM php:8.0.9-apache
 
-#Update & install some requirement
+#Update & install os deps
 RUN apt-get update && apt-get install -y \
         zlib1g-dev \
         libzip-dev \
@@ -12,14 +11,23 @@ RUN apt-get update && apt-get install -y \
         libmcrypt-dev \
         zip \
         git \
-    #Docker PHP ext
     && docker-php-ext-install \
         zip pdo_mysql gd pcntl \
+    && cd /usr/src/ \
+    && pecl bundle \
+        ds \
+    && docker-php-ext-configure \
+        /usr/src/ds \
+    && docker-php-ext-install \
+        /usr/src/ds \
+    && cd /var/www/html \
     && a2enmod \
         rewrite \
         proxy \
         proxy_http \
         proxy_wstunnel
+
+RUN  apt install -y nodejs && apt install npm -y;
 
 # Add the user UID:1000, GID:1000, home at /app
 RUN groupadd -r app -g 1000 && useradd -u 1000 -r -g app -m -d /app -s /sbin/nologin -c "App user" app && \
@@ -27,7 +35,6 @@ RUN groupadd -r app -g 1000 && useradd -u 1000 -r -g app -m -d /app -s /sbin/nol
 
 RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
 
-#upload
 RUN echo "file_uploads = On\n" \
          "memory_limit = 500M\n" \
          "upload_max_filesize = 500M\n" \
@@ -41,14 +48,18 @@ WORKDIR /var/www/html
 
 USER root
 
-COPY default.conf /etc/apache2/sites-enabled/000-default.conf
+COPY dockers/web/default.conf /etc/apache2/sites-enabled/000-default.conf
 
-Run pecl bundle \
-        ds \
-    && docker-php-ext-configure \
-        /var/www/html/ds \
-    && docker-php-ext-install \
-        /var/www/html/ds
+COPY package*.json composer.json composer.lock ./
+
+RUN npm install --production && composer install --no-dev --no-scripts;
+
+COPY . .
+
+RUN chown -R app . -v \
+    && npm run production \
+    && composer dump-autoload \
+    && php artisan optimize
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 
