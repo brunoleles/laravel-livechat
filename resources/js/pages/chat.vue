@@ -1,9 +1,10 @@
 <template>
 	<div class="m-auto max-w-screen-lg">
-		<div @click="$refs.message_input.focus()" class="flex h-screen antialiased text-gray-800">
+		<div @click="$refs.message_input.focus()" class="flex flex-col h-screen antialiased text-gray-800">
+			<div class="p-1 bg-gray-300 rounded m-1">Laravel Livechat</div>
 			<div class="flex flex-row h-full w-full overflow-x-hidden">
 				<div class="flex flex-col flex-auto h-full p-1">
-					<div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-2">
+					<div class="flex flex-col flex-auto flex-shrink-0 rounded bg-gray-100 h-full p-2">
 						<div ref="messages_container" class="flex flex-col h-full overflow-x-auto mb-4">
 							<div class="flex flex-col h-full">
 								<div class="grid grid-cols-12 gap-y-1">
@@ -16,12 +17,12 @@
 						</div>
 
 						<form @submit.prevent="send_message">
-							<div class="flex flex-row items-center rounded-xl bg-white w-full px-1 py-1">
+							<div class="flex flex-row items-center rounded bg-white w-full px-1 py-1">
 								<div class="flex-grow">
-									<input ref="message_input" v-model="message" class="flex w-full h-12 border rounded-xl focus:outline-none focus:border-indigo-300 px-2" />
+									<input ref="message_input" v-model="message" class="flex w-full h-12 border rounded focus:outline-none focus:border-indigo-300 px-2" />
 								</div>
 								<div class="ml-2">
-									<button class="flex h-12 items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0">SEND</button>
+									<button class="flex h-12 items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded text-white px-4 py-1 flex-shrink-0">SEND</button>
 								</div>
 							</div>
 						</form>
