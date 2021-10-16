@@ -50,18 +50,24 @@ USER root
 
 COPY dockers/web/default.conf /etc/apache2/sites-enabled/000-default.conf
 
-COPY package*.json composer.json composer.lock ./
+COPY --chown=app:www-data package*.json composer.json composer.lock ./
 
-RUN npm install --production && composer install --no-dev --no-scripts;
+RUN npm install --silent --production && composer install --no-dev --no-scripts;
 
-COPY . .
+COPY --chown=app:www-data . .
 
-RUN chown -R app . -v \
+RUN echo "" \
+    # chown -R app . -v \
     && npm run production \
     && composer dump-autoload \
     && php artisan optimize
 
-CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+ARG SERVERS="both"
+ENV SERVERS ${SERVERS}
+
+# CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+CMD ["/var/www/html/dockers/web/entrypoint.sh"]
+
 
 EXPOSE 80
 EXPOSE 81
